@@ -34,6 +34,7 @@ Public Class Venta
             DataGridView1.DataMember = "almacen"
 
             DataGridView1.Columns(0).HeaderText = "Id."
+            DataGridView1.Columns(1).HeaderText = "Descripción"
             DataGridView1.Columns(1).Width = 280
             DataGridView1.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             DataGridView1.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
