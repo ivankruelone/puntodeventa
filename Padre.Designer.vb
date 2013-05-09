@@ -79,6 +79,8 @@ Partial Class Padre
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusPDV = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.NidPDV = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.SucursalPDV = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
@@ -451,7 +453,7 @@ Partial Class Padre
         '
         'StatusStrip
         '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel, Me.StatusPDV})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel, Me.StatusPDV, Me.NidPDV, Me.SucursalPDV})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 431)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(632, 22)
@@ -469,6 +471,18 @@ Partial Class Padre
         Me.StatusPDV.Name = "StatusPDV"
         Me.StatusPDV.Size = New System.Drawing.Size(111, 17)
         Me.StatusPDV.Text = "ToolStripStatusLabel1"
+        '
+        'NidPDV
+        '
+        Me.NidPDV.Name = "NidPDV"
+        Me.NidPDV.Size = New System.Drawing.Size(111, 17)
+        Me.NidPDV.Text = "ToolStripStatusLabel1"
+        '
+        'SucursalPDV
+        '
+        Me.SucursalPDV.Name = "SucursalPDV"
+        Me.SucursalPDV.Size = New System.Drawing.Size(111, 17)
+        Me.SucursalPDV.Text = "ToolStripStatusLabel1"
         '
         'Padre
         '
@@ -549,5 +563,7 @@ Partial Class Padre
     Friend WithEvents ToolsMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VentaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StatusPDV As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents NidPDV As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents SucursalPDV As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

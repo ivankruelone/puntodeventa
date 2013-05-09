@@ -94,6 +94,8 @@ Public Class Padre
     Private Sub Padre_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = Inicio.nombreAplicacion
         StatusPDV.Text = "PDV: " & Inicio.maquina
+        NidPDV.Text = "Nid: " & Inicio.nid
+        SucursalPDV.Text = "Sucursal: " & Inicio.Sucursal
     End Sub
 
 End Class
