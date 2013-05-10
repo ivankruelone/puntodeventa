@@ -38,7 +38,7 @@ Public Class Padre
 
     Private Sub ExitToolsStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
-        LoginForm1.Show()
+        Login.Show()
     End Sub
 
     Private Sub CutToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CutToolStripMenuItem.Click
@@ -95,7 +95,7 @@ Public Class Padre
         Me.Text = Inicio.nombreAplicacion
         StatusPDV.Text = "PDV: " & Inicio.maquina
         NidPDV.Text = "Nid: " & Inicio.nid
-        SucursalPDV.Text = "Sucursal: " & Inicio.Sucursal
+        SucursalPDV.Text = "Sucursal: " & Inicio.sucursal
     End Sub
 
 End Class

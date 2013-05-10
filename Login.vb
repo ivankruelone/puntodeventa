@@ -1,4 +1,4 @@
-﻿Public Class LoginForm1
+﻿Public Class Login
 
     ' TODO: inserte el código para realizar autenticación personalizada usando el nombre de usuario y la contraseña proporcionada 
     ' (Consulte http://go.microsoft.com/fwlink/?LinkId=35339).  
@@ -19,7 +19,7 @@
 
     Private Sub LoginForm1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = Inicio.nombreAplicacion
-        Dim principio As principio = New principio()
+        Dim principio As Principio = New Principio()
         If principio.asignarMac() = True Then
 
         Else

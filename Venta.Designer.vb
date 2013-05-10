@@ -28,9 +28,9 @@ Partial Class Venta
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -84,6 +84,18 @@ Partial Class Venta
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Opciones"
         '
+        'Button1
+        '
+        Me.Button1.Image = Global.puntodeventa.My.Resources.Resources.clients
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(6, 28)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(126, 42)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Agregar Cliente"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.TextBox1)
@@ -100,18 +112,6 @@ Partial Class Venta
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(383, 20)
         Me.TextBox1.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.Image = Global.puntodeventa.My.Resources.Resources.clients
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(6, 28)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(126, 42)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Agregar Cliente"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '

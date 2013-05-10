@@ -1,6 +1,6 @@
 ﻿Imports System.Net.NetworkInformation
 
-Public Class principio
+Public Class Principio
 
     Function getMacAddress()
 
