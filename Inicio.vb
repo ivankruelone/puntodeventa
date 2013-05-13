@@ -5,4 +5,5 @@
     Public nid As Integer = 958
     Public sucursal As String = "CHIEM"
     Public iva As Decimal = 16
+    Public tipoCambio As Decimal = 12.3245
 End Module

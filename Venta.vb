@@ -1,6 +1,13 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class Venta
     Public eanCambiaCantidad As String
+    Public secCambiaCantidad As String
+    Public descripcionCambiaCantidad As String
+    Public cantidadCambiaCantidad As String
+    Public precioCambiaCantidad As String
+
+    Public totalPagar As Decimal
+
     Dim conn As Common.DbConnection
     Dim da As Common.DbDataAdapter
     Dim ds As DataSet = New DataSet
@@ -9,12 +16,13 @@ Public Class Venta
 
     Private Sub Venta_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = Inicio.nombreAplicacion & " - Venta"
+        Me.LabelTipodeCambio.Text = Inicio.tipoCambio
         carga_productos()
     End Sub
 
     Public Sub carga_productos()
 
-        sqlQRY = "SELECT p.sec, d.ean, p.descripcion, d.cantidad, d.total FROM detalle_temp d " _
+        sqlQRY = "SELECT p.sec, d.ean, p.descripcion, d.precio, d.cantidad, d.precio * d.cantidad, d.descuento, d.iva, d.total FROM detalle_temp d " _
             & " left join productos p on d.ean = p.ean;"
 
         conn = New MySqlConnection(Inicio.cnString)
@@ -41,16 +49,33 @@ Public Class Venta
             DataGridView1.Columns(0).HeaderText = "Sec."
             DataGridView1.Columns(1).HeaderText = "EAN"
             DataGridView1.Columns(2).HeaderText = "Descripción"
-            DataGridView1.Columns(3).HeaderText = "Cantidad"
-            DataGridView1.Columns(4).HeaderText = "Total"
-            DataGridView1.Columns(2).Width = 280
+            DataGridView1.Columns(3).HeaderText = "Precio"
+            DataGridView1.Columns(4).HeaderText = "Can."
+            DataGridView1.Columns(5).HeaderText = "Imp."
+            DataGridView1.Columns(6).HeaderText = "Desc."
+            DataGridView1.Columns(7).HeaderText = "IVA"
+            DataGridView1.Columns(8).HeaderText = "Total"
+
             DataGridView1.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             DataGridView1.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            DataGridView1.Columns(2).Width = 190
             DataGridView1.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             DataGridView1.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            DataGridView1.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            DataGridView1.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            DataGridView1.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+            DataGridView1.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
 
-            DataGridView1.Columns(0).ReadOnly = True
+            Me.DataGridView1.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Me.DataGridView1.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Me.DataGridView1.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Me.DataGridView1.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Me.DataGridView1.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Me.DataGridView1.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+            Me.DataGridView1.Columns(8).DefaultCellStyle.BackColor = Color.GreenYellow
+
+            Me.calculaTotal()
         Catch ex As Common.DbException
             MsgBox(ex.ToString)
         Finally
@@ -58,7 +83,20 @@ Public Class Venta
         End Try
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub calculaTotal()
+        Dim total As Base = New Base
+        Dim totalQry As Decimal = CDec(total.getParametro(sql:="select ifnull(sum(total), 0) from detalle_temp where caja = '" & Inicio.maquina & "';"))
+
+        Me.totalPagar = totalQry
+
+        LabelTotal.Text = FormatNumber(totalQry, 2).ToString()
+        LabelDescuento.Text = FormatNumber(CDec(total.getParametro(sql:="select ifnull(sum(descuento), 0) from detalle_temp where caja = '" & Inicio.maquina & "';")), 2).ToString()
+        LabelIVA.Text = FormatNumber(CDec(total.getParametro(sql:="select ifnull(sum(iva), 0) from detalle_temp where caja = '" & Inicio.maquina & "';")), 2).ToString()
+        LabelTotalUSD.Text = FormatNumber((totalQry / CDec(Inicio.tipoCambio)), 2).ToString()
+
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BotonCliente.Click
         Venta_cliente.Show()
     End Sub
 
@@ -97,7 +135,18 @@ Public Class Venta
     End Sub
 
     Private Sub DataGridView1_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
-        eanCambiaCantidad = DataGridView1.Rows(e.RowIndex).Cells(1).Value.ToString()
-        Venta_cambia_cantidad.Show()
+        If e.RowIndex >= 0 Then
+            secCambiaCantidad = DataGridView1.Rows(e.RowIndex).Cells(0).Value.ToString()
+            eanCambiaCantidad = DataGridView1.Rows(e.RowIndex).Cells(1).Value.ToString()
+            descripcionCambiaCantidad = DataGridView1.Rows(e.RowIndex).Cells(2).Value.ToString()
+            precioCambiaCantidad = DataGridView1.Rows(e.RowIndex).Cells(3).Value.ToString()
+            cantidadCambiaCantidad = DataGridView1.Rows(e.RowIndex).Cells(4).Value.ToString()
+            Venta_cambia_cantidad.Show()
+        End If
     End Sub
+
+    Private Sub BotonPagar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BotonPagar.Click
+        Venta_pagar.Show()
+    End Sub
+
 End Class

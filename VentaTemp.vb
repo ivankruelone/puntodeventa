@@ -154,13 +154,21 @@ Public Class VentaTemp
         Me.Ean = eanPaso
         Me.Precio = precioPaso
         Me.Cantidad = 1
+
+        Me.calculo()
+
+        Return Me.save()
+    End Function
+
+    Function calculo()
+
         Me.Descuento_tasa = 0
         Me.Descuento = 0
         Me.Iva_tasa = 0
         Me.Iva = 0
         Me.Total = Me.Precio * Me.Cantidad
 
-        Return Me.save()
+        Return Nothing
     End Function
 
     Function save()
@@ -180,14 +188,28 @@ Public Class VentaTemp
         Me.Ean = eanPaso
         Me.Precio = precioPaso
         Me.Cantidad = cantidadPaso + 1
-        Me.Descuento_tasa = 0
-        Me.Descuento = 0
-        Me.Iva_tasa = 0
-        Me.Iva = 0
-        Me.Total = Me.Precio * Me.Cantidad
+        Me.calculo()
 
         Return Me.save()
 
+    End Function
+
+    Function modificaVentaTemp(ByVal cajaPaso As String, ByVal eanPaso As String, ByVal precioPaso As Decimal, ByVal cantidadPaso As Integer)
+
+        Me.Caja = cajaPaso
+        Me.Ean = eanPaso
+        Me.Precio = precioPaso
+        Me.Cantidad = cantidadPaso
+        Me.calculo()
+
+        Return Me.save()
+
+    End Function
+
+    Function borraRegistro(ByVal cajaPaso As String, ByVal eanPaso As String)
+        Dim sql As String = "Delete from detalle_temp where caja = '" & cajaPaso & "' and ean = '" & eanPaso & "';"
+        Dim res As Boolean = Me.executeQuery(sql)
+        Return res
     End Function
 
 End Class

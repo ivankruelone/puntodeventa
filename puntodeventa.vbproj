@@ -61,6 +61,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -137,6 +139,17 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VentaTemp.vb" />
+    <Compile Include="Venta_pagar.Designer.vb">
+      <DependentUpon>Venta_pagar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Venta_pagar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Web References\Banxico\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Login.resx">
@@ -163,8 +176,12 @@
     <EmbeddedResource Include="Venta_cliente.resx">
       <DependentUpon>Venta_cliente.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Venta_pagar.resx">
+      <DependentUpon>Venta_pagar.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -174,11 +191,40 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Web References\Banxico\DgieWS.wsdl" />
+    <None Include="Web References\Banxico\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="cash_register_sh.ico" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\smartphone.png" />
+    <None Include="Resources\diagram_v2_28.png" />
+    <None Include="Resources\credit_cards.png" />
+    <None Include="Resources\payment1.png" />
+    <None Include="Resources\payment.png" />
     <None Include="Resources\clients.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://www.banxico.org.mx/DgieWSWeb/DgieWS%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Banxico\</RelPath>
+      <UpdateFromURL>http://www.banxico.org.mx/DgieWSWeb/DgieWS%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>puntodeventa_mx_org_banxico_www_DgieWS</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
